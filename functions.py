@@ -14,13 +14,16 @@ import pandas as pd
 import re
 import sys
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 import signal
 
 from create_clean_table import *
 
 global DRIVER_LOCATION
-DRIVER_LOCATION = "C:\\Users\\Utilisateur\\Desktop\\chromedriver.exe"
+DRIVER_LOCATION = "./chromedriver/chromedriver.exe"
+
+service = Service(DRIVER_LOCATION)
 
 global TYPE_ODDS
 TYPE_ODDS = 'CLOSING' # you can change to 'OPENING' if you want to collect opening odds, any other value will make the program collect CLOSING odds
@@ -201,7 +204,7 @@ def scrape_current_tournament_typeA(sport, tournament, country, SEASON, max_page
             driver.quit() # close all widows
         except:
             pass
-        driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+        driver = webdriver.Chrome(service=service)
         data = scrape_page_typeA(page,sport, country, tournament, SEASON)
         DATA_ALL = DATA_ALL + [y for y in data if y != None]
         driver.close()
@@ -263,7 +266,7 @@ def scrape_current_season_typeA(tournament, sport, country, SEASON, max_page = 2
             driver.quit() # close all widows
         except:
             pass
-        driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+        driver = webdriver.Chrome(service=service)
         data = scrape_page_current_season_typeA(page, sport, country, tournament)
         DATA_ALL = DATA_ALL + [y for y in data if y != None]
         driver.close()
@@ -363,7 +366,7 @@ def scrape_next_games_typeA(tournament, sport, country, SEASON, nmax = 30):
     except:
         pass
 
-    driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+    driver = webdriver.Chrome(service=service)
     data = scrape_page_next_games_typeA(country, sport, tournament, nmax)
     DATA_ALL = DATA_ALL + [y for y in data if y != None]
     driver.close()
@@ -553,7 +556,7 @@ def scrape_current_tournament_typeB(Surface, bestof = 3, tournament = 'wta-lyon'
     except:
         pass
 
-    driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+    driver = webdriver.Chrome(service=service)
     #SEASON = '''2020'''
     DATA_ALL = []
     for page in range(1, max_page + 1):
@@ -629,7 +632,7 @@ def scrape_next_games_typeB(Surface, bestof, tournament , country , name_to_writ
         pass
 
  
-    driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+    driver = webdriver.Chrome(service=service)
     #SEASON = '''2020'''
     DATA_ALL = []
     for page in range(1):
@@ -826,7 +829,7 @@ def scrape_current_tournament_typeC(sport, tournament, country, SEASON, max_page
             pass
     
  
-        driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+        driver = webdriver.Chrome(service=service)
         data = scrape_page_typeC(page, sport, country, tournament, SEASON)
         DATA_ALL = DATA_ALL + [y for y in data if y != None]
         driver.close()
@@ -884,7 +887,7 @@ def scrape_current_season_typeC(tournament, sport, country, SEASON, max_page = 2
             pass
 
  
-        driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+        driver = webdriver.Chrome(service=service)
         data = scrape_page_current_season_typeC(page, sport, country, tournament)
         DATA_ALL = DATA_ALL + [y for y in data if y != None]
         driver.close()
@@ -970,7 +973,7 @@ def scrape_next_games_typeC(tournament, sport, country, SEASON, nmax = 30):
         pass
 
  
-    driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+    driver = webdriver.Chrome(service=service)
     data = scrape_page_next_games_typeC(country, sport, tournament, nmax)
     DATA_ALL = DATA_ALL + [y for y in data if y != None]
     driver.close()
@@ -1133,7 +1136,7 @@ def scrape_current_tournament_typeD(sport, tournament, country, SEASON, max_page
             pass
 
  
-        driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+        driver = webdriver.Chrome(service=service)
         data = scrape_page_typeD(page, sport, country, tournament, SEASON)
         DATA_ALL = DATA_ALL + [y for y in data if y != None]
         driver.close()
@@ -1198,7 +1201,7 @@ def scrape_current_season_typeD(tournament, sport, country, SEASON, max_page = 2
             pass
 
  
-        driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+        driver = webdriver.Chrome(service=service)
         data = scrape_page_current_season_typeD(page, sport, country, tournament)
         DATA_ALL = DATA_ALL + [y for y in data if y != None]
         driver.close()
@@ -1250,7 +1253,7 @@ def scrape_next_games_typeD(tournament, sport, country, SEASON, nmax = 30):
         pass
 
  
-    driver = webdriver.Chrome(executable_path = DRIVER_LOCATION)
+    driver = webdriver.Chrome(service=service)
     data = scrape_page_next_games_typeD(country, sport, tournament, nmax)
     DATA_ALL = DATA_ALL + [y for y in data if y != None]
     driver.close()
